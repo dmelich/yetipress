@@ -1,0 +1,25 @@
+stages:
+  - deploy
+
+deploy_dev:
+  stage: deploy
+  environment: dev
+  script:
+    - cap dev deploy
+  only:
+    - master
+  tags:
+    - capistrano
+    - capistrano-gulp
+
+deploy_production:
+  stage: deploy
+  environment: production
+  script:
+    - cap production deploy
+  only:
+    - production
+  tags:
+    - capistrano
+    - capistrano-gulp
+  when: manual

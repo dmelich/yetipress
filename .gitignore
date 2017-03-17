@@ -1,0 +1,29 @@
+# Application
+web/app/plugins/*
+web/app/upgrade
+web/app/uploads/*
+
+# WordPress
+web/wp
+web/.htaccess
+
+# WP-CLI
+db-sync
+sql-dump-*.sql
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Vendor (e.g. Composer)
+vendor/*
+!vendor/.gitkeep
+
+web/app/themes/genesis/*
+
+# Vagrant
+bin
+.vagrant
+/.idea/
+/npm-debug.log
