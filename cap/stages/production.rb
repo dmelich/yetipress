@@ -1,5 +1,5 @@
 set :application, ''
-set :branch, 'master'
+set :branch, 'production'
 
 role :web, ""
 server "", user: "", roles: %w{web}

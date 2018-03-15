@@ -30,17 +30,8 @@
 	// START Editing Project Variables.
 	// Project related.
 var project                 = 'Yetipress'; // Project Name.
-var projectURL              = 'yetipress.local'; // Project URL. Could be something like localhost:8888.
+var projectURL              = 'yetipress.test'; // Project URL. Could be something like localhost:8888.
 var productURL              = './'; // Theme/Plugin URL. Leave it like it is, since our gulpfile.js lives in the root folder.
-
-// Translation related.
-var text_domain             = 'yetipress'; // Your textdomain here.
-var destFile                = 'yetipress.pot'; // Name of the transalation file.
-var packageName             = 'yetipress'; // Package name.
-var bugReport               = 'https://www.impressa.sk/contact/'; // Where can users report bugs.
-var lastTranslator          = 'David Melich <david.melich@gmail.com>'; // Last translator Email ID.
-var team                    = 'David Melich <david.melich@gmail.com>'; // Team's Email ID.
-var translatePath           = './languages' // Where to save the translation files.
 
 // Style related.
 var styleSRC                = './scss/style.scss'; // Path to main .scss file.
@@ -49,8 +40,8 @@ var styleDestination        = './css/'; // Path to place the compiled CSS file.
 
 // JS Vendor related.
 var jsVendorSRC = [
-	'bower_components/foundation-sites/dist/js/plugins/foundation.core.js',
-	'bower_components/foundation-sites/dist/js/plugins/foundation.util.mediaQuery.js '
+	'node_modules/@bower_components/foundation-sites/dist/js/plugins/foundation.core.js',
+	'node_modules/@bower_components/foundation-sites/dist/js/plugins/foundation.util.mediaQuery.js'
 ];
 var jsVendorDestination     = './js/'; // Path to place the compiled JS vendors file.
 var jsVendorFile            = 'vendors'; // Compiled JS vendors file name.
@@ -73,9 +64,9 @@ var customJSWatchFiles      = './js/custom/*.js'; // Path to all custom JS files
 var projectPHPWatchFiles    = './**/*.php'; // Path to all PHP files.
 
 var foundationScssPaths = [
-	'bower_components/normalize.scss/sass',
-	'bower_components/foundation-sites/scss',
-	'bower_components/motion-ui/src'
+	'node_modules/@bower_components/normalize.scss/sass',
+	'node_modules/@bower_components/foundation-sites/scss',
+	'node_modules/@bower_components/motion-ui/src'
 ];
 
 
@@ -125,8 +116,6 @@ var sourcemaps   = require('gulp-sourcemaps'); // Maps code in a compressed file
 var notify       = require('gulp-notify'); // Sends message notification to you
 var browserSync  = require('browser-sync').create(); // Reloads browser and injects CSS. Time-saving synchronised browser testing.
 var reload       = browserSync.reload; // For manual browser reload.
-var wpPot        = require('gulp-wp-pot'); // For generating the .pot file.
-var sort         = require('gulp-sort'); // Recommended to prevent unnecessary changes in pot-file.
 
 /**
  * Task: `browser-sync`.
@@ -194,7 +183,7 @@ gulp.task('styles', function () {
 		.pipe( sourcemaps.init( { loadMaps: true } ) )
 		.pipe( autoprefixer( AUTOPREFIXER_BROWSERS ) )
 
-		.pipe( sourcemaps.write ( styleDestination ) )
+		.pipe( sourcemaps.write ( '.' ) )
 		.pipe( lineec() ) // Consistent Line Endings for non UNIX systems.
 		.pipe( gulp.dest( styleDestination ) )
 
@@ -294,33 +283,6 @@ gulp.task( 'images', function() {
 		.pipe( notify( { message: 'TASK: "images" Completed! 💯', onLast: true } ) );
 });
 
-
-/**
- * WP POT Translation File Generator.
- *
- * * This task does the following:
- *     1. Gets the source of all the PHP files
- *     2. Sort files in stream by path or any custom sort comparator
- *     3. Applies wpPot with the variable set at the top of this file
- *     4. Generate a .pot file of i18n that can be used for l10n to build .mo file
- */
-gulp.task( 'translate', function () {
-	return gulp.src( projectPHPWatchFiles )
-		.pipe(sort())
-		.pipe(wpPot( {
-			domain        : text_domain,
-			destFile      : destFile,
-			package       : packageName,
-			bugReport     : bugReport,
-			lastTranslator: lastTranslator,
-			team          : team
-		} ))
-		.pipe(gulp.dest(translatePath))
-		.pipe( notify( { message: 'TASK: "translate" Completed! 💯', onLast: true } ) )
-
-});
-
-
 /**
  * Watch Tasks.
  *
@@ -332,3 +294,5 @@ gulp.task( 'default', ['styles', 'vendorsJs', 'customJS', 'images', 'browser-syn
 	gulp.watch( vendorJSWatchFiles, [ 'vendorsJs', reload ] ); // Reload on vendorsJs file changes.
 	gulp.watch( customJSWatchFiles, [ 'customJS', reload ] ); // Reload on customJS file changes.
 });
+
+gulp.task( 'build', ['styles', 'vendorsJs', 'customJS', 'images']);

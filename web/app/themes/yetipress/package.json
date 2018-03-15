@@ -1,6 +1,6 @@
 {
   "name": "Yetipress",
-  "version": "1.0.0",
+  "version": "2.0.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/dmelich/yetipress"
@@ -20,8 +20,20 @@
     "gulp-rename": "^1.2.0",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.5.3",
-    "gulp-uglifycss": "^1.0.6",
-    "gulp-sort": "^2.0.0",
-    "gulp-wp-pot": "^1.2.2"
+    "gulp-uglifycss": "^1.0.6"
+  },
+  "dependencies": {
+    "@bower_components/font-awesome-bower": "interval-braining/font-awesome-bower#~4.7.0",
+    "@bower_components/foundation-icon-fonts": "zurb/foundation-icon-fonts#*",
+    "@bower_components/foundation-sites": "zurb/foundation-sites#~6.3.1",
+    "@bower_components/jquery": "jquery/jquery-dist#~2.2.0",
+    "@bower_components/motion-ui": "zurb/motion-ui#~1.2.2",
+    "@bower_components/what-input": "ten1seven/what-input#~4.0.3"
+  },
+  "engines": {
+    "yarn": ">= 1.0.0"
+  },
+  "scripts": {
+    "postinstall": "node -e \"try { require('fs').symlinkSync(require('path').resolve('node_modules/@bower_components'), 'bower_components', 'junction') } catch (e) { }\""
   }
 }

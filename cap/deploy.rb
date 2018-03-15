@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock '>=3.4.0'
+lock '>=3.8.0'
 
 # set app name and repo URL
 #set :application, ''

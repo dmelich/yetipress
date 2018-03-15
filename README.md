@@ -1,4 +1,4 @@
-Yetipress 2.0
+Yetipress 2.1
 ==============
 
 This is second incarnation of Yetipress - boilerplate for Wordpress based on [Roots/Bedrock](https://github.com/roots/bedrock), [Bones for Genesis 2.0](https://github.com/cdukes/bones-for-genesis-2-0) and [ZURB Foundation](https://github.com/zurb/foundation-sites)
